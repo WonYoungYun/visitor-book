@@ -24,19 +24,17 @@ npm run build
 
 ## details
 
-firebase 사용을 위해 설치
-
 ```
 npm install --save firebase
 ```
 
-vue와 firebase 데이터 바인딩을 위한
+firebase 사용을 위해 설치합니다.
 
 ```
 npm install --save vuefire
 ```
 
-해당 명령어를 통해 vuefire와 firebase를 설치한다.
+vue와 firebase의 데이터바인딩을 지원하는 vuefire를 설치합니다.
 
 ```
 import VueFire from "vuefire";
@@ -46,7 +44,7 @@ Vue.use(firebase);
 Vue.use(VueFire);
 ```
 
-를 통해 vuefire와 firebase를 Vue에 등록한다.
+main.js에 vuefire와 firebase를 import하여 Vue.use를 통해 등록합니다.
 
 ```
 const config = {
@@ -65,7 +63,13 @@ firebase의 apiKey와 정보가 있는 config를
 firebase.initializeApp(config);
 ```
 
-을 통해 firebase와 연결
+을 통해 firebase와 연결합니다.
+
+```
+const comentsRef = firebase.database().ref(`Coments`);
+```
+
+를 통해 firebase에 미리 만든 comentsRef를 통해 Coments테이블에 접근합니다.
 
 ```
 <template>
@@ -83,23 +87,21 @@ Coments: comentsRef
 </script>
 ```
 
-vuefire로 Vue에 firebase의 데이터를 바인딩 할 수 있다.
+vuefire로 omentsRef를 통해 접근한 Coments의 데이터들을 Coments로 바인딩 해줍니다.
 
 ```
-const comentsRef = firebase.database().ref(`Coments`);
+comentsRef.push(this.newComent);
 ```
 
-를 통해 firebase에 미리 만든 Coments테이블에 접근하여
+comentsRef.push를 통해 AddComent.vue에서 전달받은 새로운 데이터를 firebase의 Coments테이블에 저장합니다.
 
-AddComent 컴포넌트에서 받은 데이터를 VisitorBook에서 firebase의 Coments에 저장한다.
+각각의 데이터에는 키가 .key의 형태로 자동으로 할당이 되며
 
-각각의 데이터에는 키가 자동으로 할당이 되며
-
-```
+````
 comentsRef.child(user[".key"]).remove();
 ```
 
-그 키로 데이터를 제거 할 수 있다.
+키를 통해 데이터에 접근하여 remove를 통해 데이터를 삭제할 수 있습니다.
 
 ## 느낀점
 
@@ -109,3 +111,5 @@ firebase의 실시간 데이터 베이스를 이용하여, 실시간으로 데�
 간단한 프로젝트를 위한 백엔드로 사용하도 괜찮다고 생각했다.
 
 firebase는 주로 인증서비스 구현을 위해 많이 사용한다고 들었는데 그런 인증서비스도 한번 구현해 보고 싶다.
+```
+````
