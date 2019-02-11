@@ -3,7 +3,10 @@
     <h1 class="title">방명록</h1>
     <div class="coments-area">
       <div v-for="(item,index) in Coments" :key="index" class="user-area">
-        <span class="user-id">{{item.name}} :&nbsp;</span>
+        <div class="user-header">
+          <span class="user-id">{{item.name}} :&nbsp;</span>
+          <span class="write-date">{{item.date}}</span>
+        </div>
         <span class="user-coment">{{item.coment}}</span>
         <a href class="coment-delete" @click.prevent="deleteComent(item)">&times;</a>
       </div>
@@ -42,7 +45,8 @@ export default {
       isAddComent: false,
       newComent: {
         name: "",
-        coment: ""
+        coment: "",
+        date: ""
       }
     };
   },
@@ -52,6 +56,7 @@ export default {
       this.isAddComent = false;
       this.newComent.name = user.name;
       this.newComent.coment = user.coment;
+      this.newComent.date = user.date;
       comentsRef.push(this.newComent);
       this.newComent = {};
     },
@@ -98,12 +103,19 @@ export default {
   border: 1px solid #41b883;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
+
 .user-id {
-  display: block;
+  display: inline-block;
   margin: 10px 0 10px 10px;
 }
+.write-date {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(-50%, 50%);
+}
 .user-coment {
-  display: inline-block;
+  display: block;
   font-style: "sans-serif";
   margin: 5px 35px 10px 35px;
   padding: 10px;

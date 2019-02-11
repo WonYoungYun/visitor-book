@@ -42,7 +42,8 @@ export default {
     return {
       user: {
         name: "",
-        coment: ""
+        coment: "",
+        date: this.getWriteDate()
       },
       wordCount: 0,
       coment: "",
@@ -60,6 +61,16 @@ export default {
         this.coment = e.target.value;
         this.wordCount = e.target.value.length;
       } else e.target.value = this.coment;
+    },
+    getWriteDate() {
+      const date = new Date();
+      const year = date.getFullYear();
+      const month =
+        date.getMonth() + 1 > 10
+          ? date.getMonth() + 1
+          : `0${date.getMonth() + 1}`;
+      const day = date.getDate() > 10 ? date.getDate() : `0${date.getDate()}`;
+      return `${year}-${month}-${day}`;
     }
   }
 };
@@ -155,7 +166,7 @@ textarea {
   font-size: 30px;
   font-weight: 700;
   border-radius: 0 10px 10px 0;
-  line-height: 1;
+  line-height: 35px;
   transition: 0.5s;
 }
 .cancle-coment-button:hover {
