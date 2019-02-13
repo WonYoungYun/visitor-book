@@ -25,7 +25,7 @@
 <script>
 import AddComent from "./AddComent.vue";
 import firebase from "firebase";
-import { config } from "../config/index.js";
+import { config } from "../configs/index.js";
 
 firebase.initializeApp(config);
 
